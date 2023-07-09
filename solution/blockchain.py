@@ -10,7 +10,6 @@ import sys
 
 users = {}
 signals = {"shutdown":False, "genesis":False}
-transaction_queue = []
 # class for each block in a chain
 class Block:
     def __init__(self, timestamp, data, previous_hash):
