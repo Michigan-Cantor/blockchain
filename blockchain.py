@@ -123,7 +123,7 @@ def proof_of_work(last_proof):
 def main():
     curport = 6000
     while not signals["shutdown"]:
-        """Main setion"""
+        """Main section"""
         
         print('\n', '\n')
         print("Menu")
