@@ -31,7 +31,6 @@ class User:
         self.host = host ## always localhost here!!
         self.name = name
         self.balance = 0.0
-        self.transactions = []
         if not signals["genesis"]:
             self.blockchain = [create_genesis_block()]
             signals["genesis"] = True
@@ -52,7 +51,6 @@ class User:
         
 #mining function, run on a separate thread 
     def mine(self):
-        """Mining function!"""
         while not signals["shutdown"]:
             last_block = self.blockchain[len(self.blockchain) - 1]
             last_proof = last_block.data['proof-of-work']
@@ -95,7 +93,6 @@ class User:
 
 
     def handle_msg(self, msg):
-        """handling messages"""
         new_block = Block(
             datetime.strptime(msg["timestamp"], "%Y-%m-%d %H:%M:%S.%f"),
             msg["data"],
@@ -112,13 +109,7 @@ class User:
         self.blockchain = sorted(self.blockchain, key=lambda x: x.timestamp)
 
 
-# def user_quit(user):
-#     signals["shutdown"] = True
-#     user.tcp_server_thread.join()
-#     user.miner.join()
-
 def print_chain(user):
-        """status on user chain"""
         print(user.name, "'s blockchain:")
         for mined_block in user.blockchain:
             print(
@@ -188,15 +179,12 @@ def proof_of_work(last_proof):
 
 def main():
     curport = 6000
-    while not signals["shutdown"]:
-        """Main setion"""
-                
+    while not signals["shutdown"]:                
         print('\n', '\n')
         print("Menu")
         print(" 1. Create New User")
         print(" 2. Make Transaction")
         print(" 3. Check Users Status")
-        # print(" 4. Quit")
 
         user_input = input("Enter your choice (1, 2, or 3): ")
 
